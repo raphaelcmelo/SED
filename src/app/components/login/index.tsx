@@ -15,9 +15,11 @@ import Container from "@mui/material/Container";
 import Copyright from "../copyright";
 import { PatternFormat } from "react-number-format";
 import { useDispatch, userSlice } from "@/lib/redux";
+import { useRouter } from "next/navigation";
 
 export default function SignIn() {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const [nome, setNome] = React.useState("Raphael");
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,6 +37,7 @@ export default function SignIn() {
         alert("a senha deve ter pelo menos 6 caracteres");
       } else {
         dispatch(userSlice.actions.loginUser(dataToSend));
+        router.push("/dashboard");
       }
     }
   };

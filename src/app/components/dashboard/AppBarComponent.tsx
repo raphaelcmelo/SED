@@ -2,11 +2,12 @@ import * as React from "react";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { styled } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import { selectUser, useSelector } from "@/lib/redux";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useDispatch, userSlice } from "@/lib/redux";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -33,6 +34,13 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function AppBarComponent({ open, toggleDrawer }: AppBarProps) {
+  const { usuario } = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const handleOnClick = () => {
+    dispatch(userSlice.actions.logoutUser());
+  };
+
   return (
     <AppBar position="absolute" open={open} toggleDrawer={toggleDrawer}>
       <Toolbar
@@ -59,12 +67,19 @@ export default function AppBarComponent({ open, toggleDrawer }: AppBarProps) {
           noWrap
           sx={{ flexGrow: 1 }}
         >
-          Dashboard
+          SED - Sistema de Eleição de Diretores
         </Typography>
-        <IconButton color="inherit">
-          <Badge badgeContent={4} color="secondary">
-            <NotificationsIcon />
-          </Badge>
+        <Typography
+          component="h1"
+          variant="h6"
+          color="inherit"
+          noWrap
+          sx={{ flexGrow: 1 }}
+        >
+          {usuario}
+        </Typography>
+        <IconButton onClick={() => handleOnClick()} color="inherit">
+          <LogoutIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
