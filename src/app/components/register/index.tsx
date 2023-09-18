@@ -1,8 +1,20 @@
 "use client";
-import { TextField } from "@mui/material";
 import React from "react";
-import { Controller } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import TextInput from "../inputs/TextInput";
+import CpfInput from "../inputs/CpfInput";
+import DateInput from "../inputs/DateInput";
+import PhoneInput from "../inputs/PhoneInput";
+
+export type Inputs = {
+  cpf: string;
+  nome: string;
+  matricula: string;
+  data: string;
+  phone: string;
+  email: string;
+};
 
 export default function Register() {
   const {
@@ -17,29 +29,33 @@ export default function Register() {
     console.log(data);
   };
 
-  console.log("errors");
   console.log(errors);
 
   console.log(watch("cpf"));
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Controller
-        defaultValue=""
-        name="cpf"
+      <CpfInput control={control} label="CPF" name="cpf" errors={errors} />
+      <DateInput
         control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <TextField
-            error
-            id="outlined-error-helper-text"
-            label="CPF"
-            defaultValue="Hello World"
-            helperText="CPF inválido."
-            {...field}
-          />
-        )}
+        label="Data de nascimento"
+        name="data"
+        errors={errors}
       />
+      <TextInput
+        control={control}
+        name="matricula"
+        label="Matrícula"
+        errors={errors}
+      />
+      <PhoneInput
+        control={control}
+        name="phone"
+        label="Telefone"
+        errors={errors}
+      />
+
+      <button type="submit">Enviar</button>
     </form>
   );
 }
