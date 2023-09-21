@@ -3,32 +3,32 @@ import React from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
 import { Inputs } from "../register";
 import { PatternFormat } from "react-number-format";
-import { cpf } from "cpf-cnpj-validator";
 
-interface CpfInputs {
+interface TextInputs {
   control: Control<Inputs, any>;
   errors: FieldErrors<Inputs>;
+  inputDTO: {
+    name: keyof Inputs;
+    label: string;
+  };
 }
 
-export default function CpfInput({ control, errors }: CpfInputs) {
+export default function FoneInput({ control, errors, inputDTO }: TextInputs) {
   return (
     <Controller
-      name={"cpf"}
+      name={inputDTO.name}
       defaultValue=""
       control={control}
-      rules={{
-        required: "Cpf é obrigatório",
-        validate: (value) => cpf.isValid(value) || "CPF invalido",
-      }}
+      rules={{ required: `${inputDTO.label} é obrigatório` }}
       render={({ field }) => (
         <PatternFormat
           fullWidth
-          error={errors.cpf ? true : false}
+          error={errors[inputDTO.name] ? true : false}
           customInput={TextField}
-          format={"###.###.###-##"}
+          format={"(##) #####-####"}
           mask={"_"}
-          label={"CPF"}
-          helperText={errors.cpf?.message}
+          label={inputDTO.label}
+          helperText={errors[inputDTO.name]?.message}
           {...field}
         />
       )}

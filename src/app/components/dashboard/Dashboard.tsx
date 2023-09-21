@@ -1,10 +1,8 @@
 "use client";
-import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
-import Copyright from "../copyright";
 import Header from "./Header";
 
 export default function Dashboard({ children }: { children: React.ReactNode }) {
@@ -27,7 +25,6 @@ export default function Dashboard({ children }: { children: React.ReactNode }) {
         <Toolbar />
         <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
           {children}
-          <Copyright sx={{ pt: 4 }} />
         </Container>
       </Box>
     </Box>

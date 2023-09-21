@@ -1,12 +1,8 @@
-import * as React from "react";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+import { Divider, IconButton, List, Toolbar, styled } from "@mui/material";
+import MuiDrawer from "@mui/material/Drawer";
+
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems, secondaryListItems } from "./listItems";
-import MuiDrawer from "@mui/material/Drawer";
-import { styled } from "@mui/material/styles";
 
 interface DrawerProps {
   open: boolean;

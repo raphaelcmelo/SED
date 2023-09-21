@@ -1,20 +1,20 @@
-import * as React from "react";
+import React from "react";
+import { styled } from "@mui/material/styles";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import { styled } from "@mui/material/styles";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import { selectUser, useSelector } from "@/lib/redux";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useDispatch, userSlice } from "@/lib/redux";
+import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import { selectUser, useDispatch, useSelector, userSlice } from "@/lib/redux";
+
+const drawerWidth: number = 240;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
-  toggleDrawer: () => void;
 }
 
-const drawerWidth: number = 240;
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
@@ -33,16 +33,24 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function AppBarComponent({ open, toggleDrawer }: AppBarProps) {
-  const { usuario } = useSelector(selectUser);
+interface AppBarComponentProps {
+  open: boolean;
+  toggleDrawer: () => void;
+}
+
+export default function AppBarComponent({
+  open,
+  toggleDrawer,
+}: AppBarComponentProps) {
   const dispatch = useDispatch();
+  const { usuario } = useSelector(selectUser);
 
   const handleOnClick = () => {
     dispatch(userSlice.actions.logoutUser());
   };
 
   return (
-    <AppBar position="absolute" open={open} toggleDrawer={toggleDrawer}>
+    <AppBar position="absolute" open={open}>
       <Toolbar
         sx={{
           pr: "24px", // keep right padding when drawer closed

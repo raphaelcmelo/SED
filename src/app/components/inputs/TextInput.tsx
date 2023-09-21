@@ -5,28 +5,26 @@ import { Inputs } from "../register";
 
 interface TextInputs {
   control: Control<Inputs, any>;
-  name: keyof Inputs;
   errors: FieldErrors<Inputs>;
-  label: string;
+  inputDTO: {
+    name: keyof Inputs;
+    label: string;
+  };
 }
 
-export default function TextInput({
-  control,
-  name,
-  errors,
-  label,
-}: TextInputs) {
+export default function TextInput({ control, errors, inputDTO }: TextInputs) {
   return (
     <Controller
+      name={inputDTO.name}
       defaultValue=""
-      name={name}
       control={control}
-      rules={{ required: `${label} é obrigatório` }}
+      rules={{ required: `${inputDTO.label} é obrigatório` }}
       render={({ field }) => (
         <TextField
-          error={errors[name] ? true : false}
-          label={label}
-          helperText={errors[name]?.message}
+          fullWidth
+          error={errors[inputDTO.name] ? true : false}
+          label={inputDTO.label}
+          helperText={errors[inputDTO.name]?.message}
           {...field}
         />
       )}
