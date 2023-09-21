@@ -3,16 +3,16 @@ import React from "react";
 import { RegisterDTO } from "@/utils/dtos/registerDTOs";
 import TextInput from "../inputs/TextInput";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Inputs } from "../register";
 import EmailInput from "../inputs/EmailInput";
 import CpfInput from "../inputs/CpfInput";
 import DateInput from "../inputs/DateInput";
 import FoneInput from "../inputs/FoneInput";
 import SelectInput from "../inputs/SelectInput";
+import { CandidatoInputs } from "../register/CandidatoRegister";
 
 interface FormBuilderProps {
-  onSubmit: SubmitHandler<Inputs>;
-  formDTOs: RegisterDTO[];
+  onSubmit: SubmitHandler<any>;
+  formDTOs: any;
 }
 
 export default function FormBuilder({ onSubmit, formDTOs }: FormBuilderProps) {
@@ -20,7 +20,7 @@ export default function FormBuilder({ onSubmit, formDTOs }: FormBuilderProps) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Inputs>({ mode: "onBlur" });
+  } = useForm<CandidatoInputs>({ mode: "onBlur" });
 
   console.log(errors);
 
@@ -31,7 +31,7 @@ export default function FormBuilder({ onSubmit, formDTOs }: FormBuilderProps) {
       case "email":
         return <EmailInput control={control} errors={errors} inputDTO={dto} />;
       case "cpf":
-        return <CpfInput control={control} errors={errors} />;
+        return <CpfInput control={control} errors={errors} inputDTO={dto} />;
       case "date":
         return <DateInput control={control} errors={errors} inputDTO={dto} />;
       case "fone":

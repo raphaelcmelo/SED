@@ -1,19 +1,21 @@
 import { TextField } from "@mui/material";
 import React from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
-import { Inputs } from "../register";
 import { PatternFormat } from "react-number-format";
 import { cpf } from "cpf-cnpj-validator";
+import { UserDTO } from "@/utils/dtos/userDTOs";
+import { UserInputs } from "../register/UserRegister";
 
 interface CpfInputs {
-  control: Control<Inputs, any>;
-  errors: FieldErrors<Inputs>;
+  control: Control<UserInputs, any>;
+  errors: FieldErrors<UserInputs>;
+  inputDTO: UserDTO;
 }
 
-export default function CpfInput({ control, errors }: CpfInputs) {
+export default function CpfInput({ control, errors, inputDTO }: CpfInputs) {
   return (
     <Controller
-      name={"cpf"}
+      name={inputDTO.name}
       defaultValue=""
       control={control}
       rules={{
@@ -23,12 +25,12 @@ export default function CpfInput({ control, errors }: CpfInputs) {
       render={({ field }) => (
         <PatternFormat
           fullWidth
-          error={errors.cpf ? true : false}
+          error={errors[inputDTO.name] ? true : false}
           customInput={TextField}
           format={"###.###.###-##"}
           mask={"_"}
-          label={"CPF"}
-          helperText={errors.cpf?.message}
+          label={inputDTO.label}
+          helperText={errors[inputDTO.name]?.message}
           {...field}
         />
       )}

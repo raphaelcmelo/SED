@@ -1,14 +1,14 @@
 import { TextField } from "@mui/material";
 import React from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
-import { Inputs } from "../register";
+import { CandidatoInputs } from "../register/CandidatoRegister";
 import { PatternFormat } from "react-number-format";
 
 interface TextInputs {
-  control: Control<Inputs, any>;
-  errors: FieldErrors<Inputs>;
+  control: Control<CandidatoInputs, any>;
+  errors: FieldErrors<CandidatoInputs>;
   inputDTO: {
-    name: keyof Inputs;
+    name: keyof CandidatoInputs;
     label: string;
   };
 }

@@ -1,12 +1,12 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { Control, Controller, FieldErrors } from "react-hook-form";
-import { Inputs } from "../register";
+import { CandidatoInputs } from "../register/CandidatoRegister";
 import { RegisterDTO } from "@/utils/dtos/registerDTOs";
 
 interface SelectInputProps {
-  control: Control<Inputs, any>;
-  errors: FieldErrors<Inputs>;
+  control: Control<CandidatoInputs, any>;
+  errors: FieldErrors<CandidatoInputs>;
   inputDTO: RegisterDTO;
 }
 

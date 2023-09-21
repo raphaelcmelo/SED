@@ -1,4 +1,4 @@
-import { Inputs } from "../../app/components/register";
+import { CandidatoInputs } from "../../app/components/register/CandidatoRegister";
 
 interface SelectField {
   value: string;
@@ -6,7 +6,7 @@ interface SelectField {
 }
 
 export interface RegisterDTO {
-  name: keyof Inputs;
+  name: keyof CandidatoInputs;
   label: string;
   input: string;
   rules?: {
@@ -27,6 +27,12 @@ const nomeDTO: RegisterDTO = {
     required: "Nome é obrigatório",
     minLength: { value: 10, message: "Escreva seu nome completo" },
   },
+};
+
+const cpfDTO: RegisterDTO = {
+  name: "cpf",
+  label: "CPF",
+  input: "cpf",
 };
 
 const matriculaDTO: RegisterDTO = {
@@ -112,14 +118,14 @@ const obsCursoGestor: RegisterDTO = {
 };
 
 const dataEntrada: RegisterDTO = {
-  name: "data_entrada",
+  name: "data_entrada_inst",
   label: "Data de Entrada",
   input: "date",
   rules: { required: "Data de Entra é Obrigatório" },
 };
 
 const dataInicioDocencia: RegisterDTO = {
-  name: "data_inicio_docencia",
+  name: "data_entrada_docencia",
   label: "Data Inicio Docencia",
   input: "date",
   rules: { required: "Data de Inicio Docencia é Obrigatorio" },
@@ -127,11 +133,12 @@ const dataInicioDocencia: RegisterDTO = {
 
 export const registerDTOs = [
   nomeDTO,
-  matriculaDTO,
+  cpfDTO,
+  telefoneDTO,
   emailDTO,
+  matriculaDTO,
   cargoDTO,
   obsCursoGestor,
-  telefoneDTO,
   dataInicioDocencia,
   dataEntrada,
   cursoGestorDTO,
